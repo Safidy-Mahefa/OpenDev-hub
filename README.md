@@ -13,3 +13,10 @@ OpenDev
     mogrations/         <----- Template base de donnees pour les migrations
     .env            <----- Infos confidentiels non commités
     .env.example    <----- Exemple commité
+
+### Le framework fiber
+C'est un framework Go utilisé pour des backends modernes, plus rapides et performants :
+`
+go get github.com/gofiber/fiber/v2
+go get github.com/joho/godotenv
+`
