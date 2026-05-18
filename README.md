@@ -18,5 +18,5 @@ OpenDev
 C'est un framework Go utilisé pour des backends modernes, plus rapides et performants :
 `
 go get github.com/gofiber/fiber/v2
-go get github.com/joho/godotenv
+go get github.com/joho/godotenv         <!-- Pour utiliser les fichiers .env -->
 `
