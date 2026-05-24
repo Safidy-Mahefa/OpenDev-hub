@@ -35,7 +35,7 @@ func setupRoutes(app *fiber.App){
 
 	// Route pour afficher tt les utilisateurs dans la base
 	app.Get("/users",func(c *fiber.Ctx) error{
-		newUser,err := users.Create(database.DB,"jjdlajd76","Safidy06","safidymahefa03@gmail.com","admin")
+		newUser,err := users.Create(database.DB,"Safidy06","safidymahefa05@gmail.com","admin")
 		fmt.Println("Nouveau utilisateur crée: ",*newUser)
 		tabUsers, err := users.GetAll(database.DB)
 		if err != nil{
