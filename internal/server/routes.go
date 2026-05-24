@@ -1,6 +1,9 @@
 package server
 
 import (
+	"MainApp/internal/database"
+	"MainApp/internal/users"
+	"fmt"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -28,5 +31,19 @@ func setupRoutes(app *fiber.App){
 		return c.JSON(fiber.Map{
 			"Page" : "Home",
 		})
+	})
+
+	// Route pour afficher tt les utilisateurs dans la base
+	app.Get("/users",func(c *fiber.Ctx) error{
+		newUser,err := users.Create(database.DB,"jjdlajd76","Safidy06","safidymahefa03@gmail.com","admin")
+		fmt.Println("Nouveau utilisateur crée: ",*newUser)
+		tabUsers, err := users.GetAll(database.DB)
+		if err != nil{
+			fmt.Println("Erreur :",err)
+			return c.Status(500).JSON(fiber.Map{"error": err.Error()})
+		}
+
+		// Afficher la liste
+		return c.JSON(fiber.Map{"Utilisateurs":tabUsers})
 	})
 }

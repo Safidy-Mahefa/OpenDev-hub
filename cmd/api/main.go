@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/joho/godotenv"
+	"MainApp/internal/database"
 	"MainApp/internal/server"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -14,6 +16,10 @@ func main() {
 	if err != nil {
 		fmt.Println("Erreur lors du chargement des fichiers env ! ")
 	}
+
+	
+	// connexion avec la bd
+	database.Connect()
 
 	// Récuperer le port
 	port := os.Getenv("PORT")
