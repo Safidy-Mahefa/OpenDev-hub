@@ -269,7 +269,4 @@ The following are known gaps in the current implementation. They are tracked her
 - The migration SQL file uses `CREATE TABLE USER` which conflicts with a reserved keyword in PostgreSQL. It should be `CREATE TABLE users`.
 - The `.env.example` file is empty. It should document all required variables.
 - `updatedAt` is set once at insert time and is never updated on row modification.
-- No structured logging. `fmt.Println` is used in several places instead of a logger.`
-go get github.com/gofiber/fiber/v2
-go get github.com/joho/godotenv         <!-- Pour utiliser les fichiers .env -->
-`
+- No structured logging. `fmt.Println` is used in several places instead of a logger.
