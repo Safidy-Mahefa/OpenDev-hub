@@ -33,10 +33,10 @@ func setupRoutes(app *fiber.App){
 		})
 	})
 
+	usersRoute := app.Group("/users") //Pour faciliter le regoupement des suffixes de /users
+
 	// Route pour afficher tt les utilisateurs dans la base
-	app.Get("/users",func(c *fiber.Ctx) error{
-		newUser,err := users.Create(database.DB,"Safidy06","safidymahefa05@gmail.com","admin")
-		fmt.Println("Nouveau utilisateur crée: ",*newUser)
+	usersRoute.Get("/",func(c *fiber.Ctx) error{
 		tabUsers, err := users.GetAll(database.DB)
 		if err != nil{
 			fmt.Println("Erreur :",err)
@@ -45,5 +45,25 @@ func setupRoutes(app *fiber.App){
 
 		// Afficher la liste
 		return c.JSON(fiber.Map{"Utilisateurs":tabUsers})
+	})
+
+	usersRoute.Get("/add", func(c *fiber.Ctx)error{
+		// Recuperer les nom,email et role
+		nom := c.Query("name")
+		email := c.Query("email")
+		role := c.Query("role")
+		newUser,err := users.Create(database.DB,nom,email,role)
+		fmt.Println("Nouveau utilisateur crée: ",*newUser)
+		return err
+	})
+
+	usersRoute.Get("/delete", func (c *fiber.Ctx)error{
+		// Récuperation du nom en paramètre de la route & suppression de l'utilisateur par son nom
+		name := c.Query("name")
+		err := users.Delete(database.DB,name)
+		if err != nil {
+			fmt.Println("Erreur lors de la suppression de l'utilisateur:",err.Error())
+		}
+		return err
 	})
 }

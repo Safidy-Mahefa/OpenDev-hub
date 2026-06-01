@@ -1,11 +1,14 @@
 package users
+
 // Les requetes pour la manipulation de Users
 
 import (
+	"fmt"
+
 	"github.com/jmoiron/sqlx"
 )
 
-// Récup tt les users dans la base de donnee 
+// Récup tt les users dans la base de donnee
 func GetAll(db *sqlx.DB) ([]User,error){
 	var tabUsers []User
 	err := db.Select(&tabUsers,"SELECT * FROM users")
@@ -23,4 +26,24 @@ func Create(db *sqlx.DB, username, email, role string) (*User,error){
 		RETURNING *`,username,email,role).StructScan(&user)
 
 	return &user,err
+}
+
+// Supprimer un utilisateur par son id/nom
+func Delete(db *sqlx.DB, name string)error{
+	// db.Exec(query) pour executer la requete mis en param
+	query := "DELETE FROM users WHERE username = $1";
+	res, err := db.Exec(query,name); //result = interface contenant le nb de lignes modifiés
+	if err != nil{
+		return err;
+	}
+
+	// Récup le nb de lignes supprimés
+	row,_ := res.RowsAffected()
+	if row <= 0{
+		fmt.Println("Aucun utilisateur supprimé; lignes supprimées:",row)
+	}else{
+		fmt.Printf("%v utilisateurs supprimés.\n",row)
+	}
+	
+	return nil
 }
