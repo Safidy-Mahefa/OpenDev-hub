@@ -255,6 +255,8 @@ Note: This route currently calls `users.Create` on every request as a developmen
 | `github.com/lib/pq` | v1.12.3 | PostgreSQL driver |
 | `github.com/joho/godotenv` | v1.5.1 | Load .env file |
 | `github.com/google/uuid` | v1.6.0 | UUID generation |
+| `golang.org/x/crypto` | v0.52.0 | Hash and security |
+| `github.com/golang-jwt/jwt/v5` | v5.3.1 | create,verify,block JWT tokens |
 
 ---
 

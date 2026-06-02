@@ -17,13 +17,13 @@ func GetAll(db *sqlx.DB) ([]User,error){
 }
 
 // Creer et inserer un nouveau utilisateur dans la base
-func Create(db *sqlx.DB, username, email, role string) (*User,error){
+func Create(db *sqlx.DB, username, email, role, password string) (*User,error){
 	var user User
 	// Inserer les valeurs dans la base de donnees et dans la variable user
 	err := db.QueryRowx(
-		`INSERT INTO users (username,email,role)
-		VALUES($1,$2,$3)
-		RETURNING *`,username,email,role).StructScan(&user)
+		`INSERT INTO users (username,email,role,password)
+		VALUES($1,$2,$3,$4)
+		RETURNING *`,username,email,role,password).StructScan(&user)
 
 	return &user,err
 }

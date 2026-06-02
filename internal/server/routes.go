@@ -1,6 +1,7 @@
 package server
 
 import (
+	"MainApp/internal/auth"
 	"MainApp/internal/database"
 	"MainApp/internal/users"
 	"fmt"
@@ -47,14 +48,28 @@ func setupRoutes(app *fiber.App){
 		return c.JSON(fiber.Map{"Utilisateurs":tabUsers})
 	})
 
-	usersRoute.Get("/add", func(c *fiber.Ctx)error{
+	app.Get("/login", func(c *fiber.Ctx)error{
 		// Recuperer les nom,email et role
 		nom := c.Query("name")
 		email := c.Query("email")
 		role := c.Query("role")
-		newUser,err := users.Create(database.DB,nom,email,role)
+		password := c.Query("password")
+
+		// Hasher le mot de passe
+		hashedPassword,err := auth.HashPassword(password)
+		if err != nil{
+			fmt.Println("Erreur lors du hash du mot de passe")
+			return err
+		}
+		newUser,err := users.Create(database.DB,nom,email,role,string(hashedPassword))
 		fmt.Println("Nouveau utilisateur crée: ",*newUser)
 		return err
+	})
+
+	app.Get("/register",func(c *fiber.Ctx)error{
+		// nom := c.Query("name")
+		// password := c.Query("password")
+		return fmt.Errorf("Implementation en cours...")
 	})
 
 	usersRoute.Get("/delete", func (c *fiber.Ctx)error{

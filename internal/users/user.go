@@ -21,4 +21,5 @@ type User struct{
 	SeasonPoints int64 		`db:"seasonpoints" json:"seasonpoints"`
 	CreatedAt time.Time 	`db:"createdat" json:"createdat"`
 	UpdatedAt time.Time 	`db:"updatedat" json:"updatedat"`
+	Password string			`db:"password" json:"password"`
 }
