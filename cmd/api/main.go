@@ -16,7 +16,6 @@ func main() {
 	if err != nil {
 		fmt.Println("Erreur lors du chargement des fichiers env ! ")
 	}
-
 	
 	// connexion avec la bd
 	database.Connect()

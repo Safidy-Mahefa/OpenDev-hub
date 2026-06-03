@@ -1,6 +1,5 @@
 CREATE TABLE USER (
         id VARCHAR(10) PRIMARY KEY,
-        password VARCHAR(12) NOT NULL,
         username VARCHAR(255) UNIQUE NOT NULL,
         email VARCHAR(255) NOT NULL,
         name VARCHAR(255),
@@ -14,5 +13,6 @@ CREATE TABLE USER (
         totalPoints INT DEFAULT 0,
         seasonPoints INT DEFAULT 0,
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        password VARCHAR(12) NOT NULL
 );
